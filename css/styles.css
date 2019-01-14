@@ -1,7 +1,7 @@
 /*@import url(animate.css);*/
 
 html { 
-  background: url(../img/bg2560-60.jpg) no-repeat center fixed; 
+  background: #0e0e0e;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -9,6 +9,7 @@ html {
 }
 
 canvas {
+  background: url(../img/bg2560-60.jpg) no-repeat center fixed; 
   width: 100vw;
   height: 100vh;
   display: block;
