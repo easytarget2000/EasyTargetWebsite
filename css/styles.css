@@ -1,5 +1,23 @@
 /*@import url(animate.css);*/
 
+html { 
+  background: url(../img/bg2560-60.jpg) no-repeat center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -9999;
+}
+
 body {
 	margin: 0px;
 	background-color: #0e0e0e;
