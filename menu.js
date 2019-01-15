@@ -1,5 +1,5 @@
-function ToggleMenu(menuId){
-    var allMenus = document.getElementsByClassName("hidden_menu");
+function toggleMenu(menuId){
+    let allMenus = document.getElementsByClassName("hidden_menu");
 
     [].forEach.call(
         allMenus,
@@ -7,16 +7,16 @@ function ToggleMenu(menuId){
             if (menuId === menu.id) {
                 ShowElement(menu);
             } else {
-                HideElement(menu);
+                hideElement(menu);
             }
         }
     );
 }
 
-function ShowElement(element){
+function showElement(element){
     element.style.display = "block";
 }
 
-function HideElement(element){
+function hideElement(element){
     element.style.display = "none";
 }
