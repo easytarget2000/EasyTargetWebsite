@@ -1,19 +1,22 @@
-function ShowMenu(menuId){
-    var menuId = document.getElementById(menuId);
+function ToggleMenu(menuId){
+    var allMenus = document.getElementsByClassName("hidden_menu");
 
-    if (menuId.style.display == 'block') {
-        menuId.style.display = 'none';
-    } else {
-        menuId.style.display = 'block';                    
-    }
+    [].forEach.call(
+        allMenus,
+        function(menu) {
+            if (menuId === menu.id) {
+                ShowElement(menu);
+            } else {
+                HideElement(menu);
+            }
+        }
+    );
 }
 
-function HideMenu(){
-    var menuId = document.getElementByClass("hidden_menu");
+function ShowElement(element){
+    element.style.display = "block";
+}
 
-    if (menuId.style.display == 'block') {
-        menuId.style.display = 'none';
-    } else {
-        menuId.style.display = 'block';                    
-    }
+function HideElement(element){
+    element.style.display = "none";
 }
