@@ -1,9 +1,10 @@
 var strokeStyle = "rgba(255, 255, 255, 0.2)"
-var autoMoverPos;
-var autoMoverVelocity;
-var autoMoverInterval = 16;
-var autoMoverVelocityJitter = 32;
-var randomAutoMovePosProbability = 0.1;
+var autoMoverPos = [0, 0];
+var autoMoverVelocity = [0, 0];
+var autoMoverInterval = 32;
+var maxAutoMoverVelocity = 32;
+var autoMoveChangeVelocityProbability = 0.1;
+var autoMoveChangePosProbability = 0.1;
 
 window.onload = function() {
     var canvas = document.getElementById("background");
@@ -29,10 +30,10 @@ function setupCanvas(canvas) {
         }
     );
 
-    let useAutoMover = false
+    let useAutoMover = true
     if (useAutoMover) {
-        initRandomAutoMovePos(width, height);
-        autoMoverVelocity = [autoMoverVelocityJitter, autoMoverVelocityJitter];
+        initAutoMoverPos();
+        initAutoMoverVelocity(width, height);
         setInterval(
             function autoMoveIntervalTriggered(handler) {
                 autoMove(context)
@@ -62,11 +63,21 @@ function autoMove(context) {
     if (autoMoverPos[1] < 0 || autoMoverPos[1] > context.canvas.height) {
         autoMoverVelocity[1] *= -1;
     }
+    
+    if (Math.random() > (1.0 - autoMoveChangePosProbability)) {
+        initAutoMoverPos(context.canvas.width, context.canvas.height);
+    }
 
-    autoMoverVelocity[0] += (autoMoverVelocityJitter / 2) - Math.random(autoMoverVelocityJitter);
-    autoMoverVelocity[1] += (autoMoverVelocityJitter / 2) - Math.random(autoMoverVelocityJitter);
+    if (Math.random() > (1.0 - autoMoveChangeVelocityProbability)) {
+        initAutoMoverVelocity()
+    }
 }
 
-function initRandomAutoMovePos(width, height) {
-    autoMoverPos = [Math.random(1) * width, Math.random(1) * height];
+function initAutoMoverPos(width, height) {
+    autoMoverPos = [Math.random() * width, Math.random() * height];
+}
+
+function initAutoMoverVelocity() {
+    autoMoverVelocity[0] = (maxAutoMoverVelocity / 2) - (Math.random(1) * maxAutoMoverVelocity);
+    autoMoverVelocity[1] = (maxAutoMoverVelocity / 2) - (Math.random(1) * maxAutoMoverVelocity);
 }
