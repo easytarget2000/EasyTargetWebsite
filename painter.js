@@ -23,9 +23,9 @@ function setupCanvas(canvas) {
 
     canvas.addEventListener(
         "mousemove",
-        function onMouseover(e) {
-            let mouseX = e.clientX - 8;
-            let mouseY = e.clientY - 8;                             
+        function onMouseover(event) {
+            let mouseX = event.clientX - 8;
+            let mouseY = event.clientY - 8;                             
             drawShape(context, mouseX, mouseY);
         }
     );
