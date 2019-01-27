@@ -9,6 +9,7 @@ html {
 }
 
 canvas {
+  background: url(../img/bg_5_1920x1920_60.jpg) no-repeat center fixed; 
   width: 100vw;
   height: 100vh;
   display: block;
@@ -26,6 +27,7 @@ body {
 }
 
 div {
+  padding: 16px;
 	text-align: center;
 	/*color: #FFFFFF;*/
 }
@@ -38,8 +40,6 @@ div {
 }
 
 div.links {
-	/* margin: 1em auto; */
-	margin-top: 2em;
 	font-size: 2em;
   text-shadow: 0 0 2px rgba(155, 155, 155, 0.9);
 }
