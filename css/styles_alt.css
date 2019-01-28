@@ -9,7 +9,6 @@ html {
 }
 
 canvas {
-  background: url(../img/bg_5_1920x1920_60.jpg) no-repeat center fixed; 
   width: 100vw;
   height: 100vh;
   display: block;
