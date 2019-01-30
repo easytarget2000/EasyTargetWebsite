@@ -3,8 +3,8 @@ var color_ = {};
 var backgroundColor = {};
 var numOfInitialNodes = 64;
 var numOfRoundsPerFrame = 1;
-var colorAlpha = 60;
-var colorMinBrightness = 32.0;
+var colorAlpha = 80;
+var colorMinBrightness = 0;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
