@@ -5,7 +5,7 @@ function toggleMenu(menuId){
         allMenus,
         function(menu) {
             if (menuId === menu.id) {
-                ShowElement(menu);
+                showElement(menu);
             } else {
                 hideElement(menu);
             }

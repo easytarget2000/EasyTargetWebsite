@@ -26,20 +26,24 @@ body {
 }
 
 div {
+  margin: 0;
   padding: 16px;
-	text-align: center;
-	/*color: #FFFFFF;*/
+  color: #CCCCCC;
+  text-align: center;
+  background-color: #0e0e0e;
 }
 
-#title {
-  margin-top: 7em;
-	font-size: 3em;
-	color: #CCCCCC;
+#main {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
   font-weight: bold;
 }
 
-div.links {
-	font-size: 2em;
+#links {
+  font-size: 2em;
   text-shadow: 0 0 2px rgba(155, 155, 155, 0.9);
 }
 
