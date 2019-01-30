@@ -57,7 +57,9 @@ function drawAndUpdateFoliages() {
 }
 
 function setColor() {
-    let brightness = colorMinBrightness + ((255.0 - colorMinBrightness) * (mouseX / width));
+    let darkestSpotX = width / 2.0;
+    let brightnessRatio = abs(darkestSpotX - mouseX) / darkestSpotX;
+    let brightness = colorMinBrightness + ((255.0 - colorMinBrightness) * brightnessRatio);
     color_ = color(brightness, brightness, brightness, colorAlpha);
 }
 
