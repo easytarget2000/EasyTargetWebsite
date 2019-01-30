@@ -94,8 +94,8 @@ class Foliage {
 
     initCircle(minRadius, maxRadius) {
         var lastNode;
-        let circleCenterX = startX + (this.getJitter() * 10.0);
-        let circleCenterY = startY + (this.getJitter() * 10.0);
+        let circleCenterX = startX;
+        let circleCenterY = startY;
 
         let radius = maxRadius;
         let squeezeFactor = random(0.66) + 0.66;
