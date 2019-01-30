@@ -3,6 +3,8 @@ var color_ = {};
 var backgroundColor = {};
 var numOfInitialNodes = 64;
 var numOfRoundsPerFrame = 1;
+var colorAlpha = 60;
+var colorMinBrightness = 32.0;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -19,9 +21,7 @@ function draw() {
     stroke(250);
     noFill();
 
-    if (random(1.0) > 0.9) {
-        setColor();
-    }
+    setColor();
 
     // rotate_();
     drawAndUpdateFoliages();
@@ -57,7 +57,8 @@ function drawAndUpdateFoliages() {
 }
 
 function setColor() {
-    color_ = color(255, 255, 255, 60);
+    let brightness = colorMinBrightness + ((255.0 - colorMinBrightness) * (mouseX / width));
+    color_ = color(brightness, brightness, brightness, colorAlpha);
 }
 
 function getDisplaySize() {
@@ -70,7 +71,15 @@ function getDisplaySize() {
 
 class Foliage {
 
-    constructor(numOfInitialNodes, jitter, startX, startY, minRadius, maxRadius, numberOfCircles = 4) {
+    constructor(
+        numOfInitialNodes,
+        jitter,
+        startX,
+        startY,
+        minRadius,
+        maxRadius,
+        numberOfCircles = 4
+    ) {
         this.numOfInitialNodes = numOfInitialNodes;
         this.jitter = jitter;
         this.startX = startX;
@@ -79,7 +88,7 @@ class Foliage {
         this.firstNode;
 
         this.age = 0;
-        this.maxAge = 1024 * 64;
+        this.maxAge = 1024 * 32;
 
         this.totalNodeCounter = 0;
         this.maxNumOfNodesAddedPerRound = 4;
@@ -114,7 +123,6 @@ class Foliage {
                 this.firstNode = node;
                 lastNode = node;
             } else if (nodeIndex == this.numOfInitialNodes - 1) {
-                //mPreferredNeighbourDistance = node.distanceToNode(lastNode);
                 lastNode.next = node;
                 node.next = this.firstNode;
             } else {
@@ -187,14 +195,6 @@ class Foliage {
             ++nodeCounter;
         } while (!this.stopped && currentNode !== this.firstNode);
 
-        // DEBUG: Draw last node bigger.
-        strokeWeight(1.0);
-        point(
-            currentNode.positionVector.x,
-            currentNode.positionVector.y,
-            currentNode.positionVector.z
-        );
-
         if (drawOutline) {
             endShape(CLOSE);
         }
@@ -223,7 +223,7 @@ class Foliage {
     }
 
     getJitter() {
-        return this.jitter * 0.5 - random(this.jitter);
+        return this.jitter * (0.5 - random(this.jitter));
     }
 
 }
@@ -235,15 +235,20 @@ class Foliage {
 class FoliageNode {
 
     constructor(positionVector, jitter) {
+        let pushForceRatio = 0.005;
+        let radiusRatio = 1.0 / 256.0;
+        let neighbourGravityRatio = 1.0 / 1.1   ;
+        let preferredNeighbourDistanceRatio = 0.1;
+
         this.positionVector = positionVector;
         this.jitter = jitter;
         this.next;
 
         let displaySize = getDisplaySize();
-        this.pushForce = displaySize * 0.0047;
-        this.radius = displaySize / 256.0;
-        this.neighbourGravity = -this.radius / 1.5;
-        this.preferredNeighbourDistance = 2.0;
+        this.pushForce = displaySize * pushForceRatio;
+        this.radius = displaySize * radiusRatio;
+        this.neighbourGravity = -this.radius * neighbourGravityRatio;
+        this.preferredNeighbourDistance = displaySize * preferredNeighbourDistanceRatio;
         this.maxPushDistance = displaySize
     }
 
